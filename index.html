@@ -7,13 +7,23 @@
 </head>
 <body>
     <script>
-        window.onload = function() {
-            // 設定要填入輸入框的訊息
-            const message = encodeURIComponent(`【接送機叫車格式】\n📅 日期：\n⏰ 時間：\n🚏 上車地點：\n🚏 下車地點：\n👨‍👩‍👧‍👦 人數：\n🧳 行李：\n✈️ 航班：\n⭐ 備註：`);
+        function openLineChat() {
+            const message = `【接送機叫車格式】\n📅 日期：\n⏰ 時間：\n🚏 上車地點：\n🚏 下車地點：\n👨‍👩‍👧‍👦 人數：\n🧳 行李：\n✈️ 航班：\n⭐ 備註：`;
+            const encodedMessage = encodeURIComponent(message);
             
-            // 直接導向 LINE 聊天框（這樣會填入輸入框而不會發送）
-            window.location.href = `https://line.me/R/msg/text/?${message}`;
+            if (/Android/i.test(navigator.userAgent)) {
+                // Android 使用 intent://
+                window.location.href = `intent://msg/text/${encodedMessage}#Intent;scheme=line;package=jp.naver.line.android;end;`;
+            } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS 使用 line://msg/text/
+                window.location.href = `line://msg/text/${encodedMessage}`;
+            } else {
+                alert("請使用 LINE App 開啟此功能");
+            }
         }
+
+        // 讓頁面載入時自動執行
+        window.onload = openLineChat;
     </script>
 </body>
 </html>
