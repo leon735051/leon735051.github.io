@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE 訊息填入</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            // 設定要填入輸入框的訊息
+            const message = encodeURIComponent(`【接送機叫車格式】\n📅 日期：\n⏰ 時間：\n🚏 上車地點：\n🚏 下車地點：\n👨‍👩‍👧‍👦 人數：\n🧳 行李：\n✈️ 航班：\n⭐ 備註：`);
+            
+            // 直接導向 LINE 聊天框（這樣會填入輸入框而不會發送）
+            window.location.href = `https://line.me/R/msg/text/?${message}`;
+        }
+    </script>
+</body>
+</html>
